@@ -1,0 +1,37 @@
+[
+  {
+    "color": "#CE2C3C",
+    "category": "Angry",
+    "words": ["let down", "humiliated", "bitter", "mad", "aggressive", "frustrated", "distant", "critical"]
+  },
+  {
+    "color": "#B25C30",
+    "category": "Disgusted",
+    "words": ["disapproving", "disappointed", "awful", "repelled"]
+  },
+  {
+    "color": "#322B54",
+    "category": "Sad",
+    "words": ["hurt", "depressed", "guilty", "despair", "vulnerable", "lonely"]
+  },
+  {
+    "color": "#E88501",
+    "category": "Happy",
+    "words": ["playful", "content", "interested", "proud", "accepted", "powerful", "peaceful", "trusting", "optimistic"]
+  },
+  {
+    "color": "#4A745F",
+    "category": "Surprised",
+    "words": ["startled", "confused", "amazed", "excited"]
+  },
+  {
+    "color": "#512E7A",
+    "category": "Bad",
+    "words": ["bored", "busy", "stressed", "tired"]
+  },
+  {
+    "color": "#D2278A",
+    "category": "Fearful",
+    "words": ["scared", "anxious", "insecure", "weak", "rejected", "threatened"]
+  }
+]
