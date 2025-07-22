@@ -1,5 +1,5 @@
 /**
- * emotion-driven sketch inspired by feelingswheel.com and OpenProcessing theme https://openprocessing.org/curation/89576
+ * #WCCChallenge Created by Raphaël de Courville (https://openprocessing.org/curation/78544)
  * Source JSON by Geoffrey Roberts (borrowed without permission) https://feelingswheel.com/
  * Interaction system by libregd + Copilot
  */
@@ -8,13 +8,13 @@ let emotionRaw;
 let emotionData = [];
 let bubbles = [];
 
-let cursorRadius = 10;         // current radius of mouse ball
-let cursorTargetRadius = 10;   // target radius for smoothing
-let cursorMomentum = 0;        // accumulative emotional effect
+let cursorRadius = 10; // current radius of mouse ball
+let cursorTargetRadius = 10; // target radius for smoothing
+let cursorMomentum = 0; // accumulative emotional effect
 
 function preload() {
   loadJSON("emotions.json", (data) => {
-    emotionRaw = data;         // load emotion dataset
+    emotionRaw = data; // load emotion dataset
   });
 }
 
@@ -24,27 +24,9 @@ function setup() {
   emotionData = emotionRaw;
 
   // generate bubble objects from emotion words
-  for (let i = 0; i < emotionData.length; i++) {
-    let color = emotionData[i].color;
-    let category = emotionData[i].category;
-    let wordList = emotionData[i].words;
-
-    for (let word of wordList) {
-      let r = random(10, 20);  // initial radius
-      bubbles.push({
-        x: random(width),
-        y: random(height),
-        bx: random(width),     // actual position (for easing)
-        by: random(height),
-        r: r,
-        baseR: r,              // permanent growth value
-        col: color,
-        offsetX: random(0.02, 0.05),
-        offsetY: random(0.02, 0.05),
-        word: word,
-        category: category,
-        pulseTime: null        // trigger for merge animation
-      });
+  for (let emo of emotionData) {
+    for (let word of emo.words) {
+      bubbles.push(createBubble(word, emo.category, emo.color));
     }
   }
 }
@@ -56,14 +38,14 @@ function draw() {
   pointerY = touches.length > 0 ? touches[0].y : mouseY;
 
   background(204);
-
   // Title text in the center
-  fill(255,50);
+  fill(255, 50);
   textAlign(CENTER, CENTER);
   textSize(128);
-  text("Must Be Moved", width / 2, height / 2);
-  
-  
+
+  text("MUST", width / 2, height / 2 - 100);
+  text("BE", width / 2, height / 2);
+  text("MOVED", width / 2, height / 2 + 100);
 
   // bubble merging logic: same category, close distance
   for (let i = bubbles.length - 1; i >= 0; i--) {
@@ -84,9 +66,9 @@ function draw() {
           col: b1.col,
           offsetX: random(0.02, 0.05),
           offsetY: random(0.02, 0.05),
-          word: b1.category,
+          word: b1.word,
           category: b1.category,
-          pulseTime: frameCount
+          pulseTime: frameCount,
         });
         break;
       }
@@ -156,7 +138,7 @@ function draw() {
 }
 
 function drawCursorBall(radius = 10) {
-  fill(255, 200);     // semi-transparent white
+  fill(255, 200); // semi-transparent white
   noStroke();
   ellipse(pointerX, pointerY, radius, radius);
 }
@@ -185,4 +167,21 @@ function touchStarted() {
 function touchMoved() {
   // Optional: could be used later for advanced gestures
   return false;
+}
+function createBubble(word, category, color) {
+  let r = random(10, 20);
+  return {
+    // x: random(width),
+    // y: random(height),
+    bx: random(width),
+    by: random(height),
+    r: r,
+    baseR: r,
+    col: color,
+    offsetX: random(0.02, 0.05),
+    offsetY: random(0.02, 0.05),
+    word: word,
+    category: category,
+    pulseTime: null,
+  };
 }
